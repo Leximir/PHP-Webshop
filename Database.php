@@ -1,7 +1,9 @@
 <?php
 
-class Database {
+class Database
+{
     public $connection;
+
     public function __construct($config, $username = 'root', $password = '')
     {
         // Old $dsn :      $dsn="mysql:host=localhost;port=3306;dbname=my_app;charset=utf8mb4";
@@ -11,6 +13,7 @@ class Database {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
     }
+
     public function query($query, $params = [])
     {
         $statement = $this->connection->prepare($query);

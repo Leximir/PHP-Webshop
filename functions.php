@@ -1,6 +1,7 @@
 <?php
 
-function dd($value){
+function dd($value)
+{
     echo "<pre>";
     var_dump($value);
     echo "</pre>";
@@ -17,6 +18,7 @@ function dd($value){
 // if statement above is proportional to this one line echo statement
 //echo $_SERVER['REQUEST_URI'] === '/' ? 'bg-gray-900 text-white' : 'text-gray-300';
 
-function urlIs($value){
+function urlIs($value)
+{
     return $_SERVER['REQUEST_URI'] === $value;
 }
