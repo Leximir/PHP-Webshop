@@ -17,13 +17,7 @@ function abort($code = 404)
     die();
 }
 
-$routes = [
-    '/' => 'controllers/index.php',
-    '/about' => 'controllers/about.php',
-    '/contact' => 'controllers/contact.php',
-    '/notes' => 'controllers/notes.php',
-    '/note' => 'controllers/note.php'
-];
+$routes = require 'routes.php';
 
 $uri = $_SERVER['REQUEST_URI']; // We declare the current uri
 $uri = parse_url($uri); // We parse that uri to path and query. Example: /products?id=5 , becomes array(2) { ["path"]=>string(8) "/products" ["query"]=>string(4) "id=5"}
