@@ -1,6 +1,6 @@
 <?php
 
-$config = require 'config.php';
+$config = require base_path('config.php');
 $db = new Database($config['database']);
 
 $heading = "Note";
@@ -19,4 +19,7 @@ if ($note['user_id'] !== $currentUserId) {
     abort(Response::FORBIDDEN);
 }
 
-require "views/notes/show.view.php";
+view("notes/show.view.php",[
+    'heading' => $heading,
+    'note' => $note
+]);
