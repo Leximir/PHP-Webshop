@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
     $errors = [];
 
-    if(strlen($_POST['body'] === 0)){
+    if(strlen(trim($_POST['body'])) === 0){
         $errors['body'] = "A body is required";
     }
 
