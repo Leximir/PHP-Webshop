@@ -19,4 +19,4 @@ if ($note['user_id'] !== $currentUserId) {
     abort(Response::FORBIDDEN);
 }
 
-require "views/note.view.php";
+require "views/notes/show.view.php";
