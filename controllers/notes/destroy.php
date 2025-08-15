@@ -11,7 +11,7 @@ $heading = "Note";
 $currentUserId = 3;
 
 $note = $db->query("SELECT * FROM notes WHERE id = :id", [
-    'id' => $_GET['id']
+    'id' => $_POST['id']
 ])->fetch();
 
 if (!$note) {
@@ -22,7 +22,10 @@ if ($note['user_id'] !== $currentUserId) {
     abort(Response::FORBIDDEN);
 }
 
-view("notes/show.view.php",[
-    'heading' => $heading,
-    'note' => $note
+$db->query('DELETE FROM notes WHERE id = :id AND user_id = :user_id',[
+    'id' => $_POST['id'],
+    'user_id' => $currentUserId
 ]);
+
+header("Location: /notes");
+exit();
