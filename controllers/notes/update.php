@@ -30,7 +30,7 @@ if(! Validator::stringCheck($_POST['body'], 1, 1000)){
 }
 
 if(count($errors)){
-    view('notes/edit.view.php',[
+    return view('notes/edit.view.php',[
         'heading' => 'Edit Note',
         'errors' => $errors,
         'note' => $note
