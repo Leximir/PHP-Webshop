@@ -30,11 +30,12 @@ if(! Validator::stringCheck($_POST['body'], 1, 1000)){
 }
 
 if(count($errors)){
-    return view('notes/edit.view.php',[
+    view('notes/edit.view.php',[
         'heading' => 'Edit Note',
         'errors' => $errors,
         'note' => $note
     ]);
+    die();
 }
 
 // If no validation errors, update the record in the notes database table
