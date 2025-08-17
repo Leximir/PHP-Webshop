@@ -27,8 +27,27 @@ if(! empty($errors)){
 $config = require base_path('config.php');
 $db = new Database($config['database']);
 
-$result = $db->query("SELECT * FROM users WHERE email = :email",[
+$user = $db->query("SELECT * FROM users WHERE email = :email",[
     'email' => $email
 ])->find();
+
+if($user){
     // if yes, redirect to login page
+    header("Location: /login");
+    exit();
+} else {
     // if not, save one to the database, and then log the user in, and redirect
+    $db->query("INSERT INTO users(email, password) VALUES (:email, :password)",[
+        'email' => $email,
+        'password' => $password
+    ]);
+    // Mark that tha user has logged in
+    $_SESSION['logged_in'] = true;
+    $_SESSION['user'] = [
+        'email' => $email
+    ];
+
+    header("Location: /");
+    exit();
+}
+

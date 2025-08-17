@@ -13,7 +13,7 @@ $errors = [];
 // Find the corresponding note
 $note = $db->query("SELECT * FROM notes WHERE id = :id", [
     'id' => $_POST['id']
-])->fetch();
+])->find();
 
 // Authorize that the current user can edit the note
 if (!$note) {
