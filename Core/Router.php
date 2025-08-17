@@ -2,6 +2,10 @@
 
 namespace Core;
 
+use Core\Middleware\Auth;
+use Core\Middleware\Guest;
+use Core\Middleware\Middleware;
+
 class Router
 {
     protected $routes = [];
@@ -10,38 +14,47 @@ class Router
         $this->routes[] = [
             'uri' => $uri,
             'controller' => $controller,
-            'method' => $method
+            'method' => $method,
+            'middleware' => null
         ];
+        return $this;
     }
 
     public function get($uri, $controller){
 
-        $this->addToRoutes($uri, $controller, "GET");
+        return $this->addToRoutes($uri, $controller, "GET");
 
     }
 
     public function post($uri, $controller){
 
-        $this->addToRoutes($uri, $controller, "POST");
+        return $this->addToRoutes($uri, $controller, "POST");
 
     }
 
     public function delete($uri, $controller){
 
-        $this->addToRoutes($uri, $controller, "DELETE");
+        return $this->addToRoutes($uri, $controller, "DELETE");
 
     }
 
     public function patch($uri, $controller){
 
-        $this->addToRoutes($uri, $controller, "PATCH");
+        return $this->addToRoutes($uri, $controller, "PATCH");
 
     }
 
     public function put($uri, $controller){
 
-        $this->addToRoutes($uri, $controller, "PUT");
+        return $this->addToRoutes($uri, $controller, "PUT");
 
+    }
+
+    public function only($key)
+    {
+        $this->routes[array_key_last($this->routes)]['middleware'] = $key;
+
+        return $this;
     }
 
     protected function abort($code = 404)
@@ -55,6 +68,20 @@ class Router
 
         foreach ($this->routes as $route){
             if($route['uri'] === $uri && $route['method'] === strtoupper($method)){
+            // Apply the middleware
+                if($route['middleware']){
+                    $middleware = Middleware::MAP[$route['middleware']];
+                    (new $middleware)->handle();
+                }
+//               The if statement above is the same as the multiple if statements bellow
+//                if($route['middleware'] === 'guest'){
+//                    (new Guest)->handle();
+//                }
+//
+//                if($route['middleware'] === 'auth'){
+//                    (new Auth)->handle();
+//                }
+
                 return require base_path($route['controller']);
             }
         }
