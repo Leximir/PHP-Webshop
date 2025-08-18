@@ -27,5 +27,4 @@ $db->query('DELETE FROM notes WHERE id = :id AND user_id = :user_id',[
     'user_id' => $currentUserId
 ]);
 
-header("Location: /notes");
-exit();
+redirect('/notes');
