@@ -2,15 +2,21 @@
 
 namespace Core;
 
-use Core\Middleware\Auth;
-use Core\Middleware\Guest;
 use Core\Middleware\Middleware;
 
 class Router
 {
     protected $routes = [];
 
-    public function addToRoutes($uri, $controller, $method){
+    public function get($uri, $controller)
+    {
+
+        return $this->addToRoutes($uri, $controller, "GET");
+
+    }
+
+    public function addToRoutes($uri, $controller, $method)
+    {
         $this->routes[] = [
             'uri' => $uri,
             'controller' => $controller,
@@ -20,31 +26,29 @@ class Router
         return $this;
     }
 
-    public function get($uri, $controller){
-
-        return $this->addToRoutes($uri, $controller, "GET");
-
-    }
-
-    public function post($uri, $controller){
+    public function post($uri, $controller)
+    {
 
         return $this->addToRoutes($uri, $controller, "POST");
 
     }
 
-    public function delete($uri, $controller){
+    public function delete($uri, $controller)
+    {
 
         return $this->addToRoutes($uri, $controller, "DELETE");
 
     }
 
-    public function patch($uri, $controller){
+    public function patch($uri, $controller)
+    {
 
         return $this->addToRoutes($uri, $controller, "PATCH");
 
     }
 
-    public function put($uri, $controller){
+    public function put($uri, $controller)
+    {
 
         return $this->addToRoutes($uri, $controller, "PUT");
 
@@ -57,19 +61,13 @@ class Router
         return $this;
     }
 
-    protected function abort($code = 404)
+    public function route($uri, $method)
     {
-        http_response_code($code);
-        require base_path('views/' . $code . '.php');
-        die();
-    }
 
-    public function route($uri, $method){
-
-        foreach ($this->routes as $route){
-            if($route['uri'] === $uri && $route['method'] === strtoupper($method)){
-            // Apply the middleware
-                if($route['middleware']){
+        foreach ($this->routes as $route) {
+            if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+                // Apply the middleware
+                if ($route['middleware']) {
                     $middleware = Middleware::MAP[$route['middleware']];
                     (new $middleware)->handle();
                 }
@@ -87,5 +85,12 @@ class Router
         }
 
         $this->abort();
+    }
+
+    protected function abort($code = 404)
+    {
+        http_response_code($code);
+        require base_path('views/' . $code . '.php');
+        die();
     }
 }

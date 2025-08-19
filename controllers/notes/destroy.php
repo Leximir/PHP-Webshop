@@ -22,7 +22,7 @@ if ($note['user_id'] !== $currentUserId) {
     abort(Response::FORBIDDEN);
 }
 
-$db->query('DELETE FROM notes WHERE id = :id AND user_id = :user_id',[
+$db->query('DELETE FROM notes WHERE id = :id AND user_id = :user_id', [
     'id' => $_POST['id'],
     'user_id' => $currentUserId
 ]);

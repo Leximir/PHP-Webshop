@@ -20,7 +20,7 @@ if ($note['user_id'] !== $currentUserId) {
     abort(Response::FORBIDDEN);
 }
 
-view("notes/show.view.php",[
+view("notes/show.view.php", [
     'heading' => "Note",
     'note' => $note
 ]);

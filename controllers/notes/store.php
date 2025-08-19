@@ -8,12 +8,12 @@ $db = new Database($config['database']);
 
 $errors = [];
 
-if(! Validator::stringCheck($_POST['body'], 1, 1000)){
+if (!Validator::stringCheck($_POST['body'], 1, 1000)) {
     $errors['body'] = "A body of no more than 1000 characters is required.";
 }
 
-if(! empty($errors)){
-     view("notes/create.view.php",[
+if (!empty($errors)) {
+    view("notes/create.view.php", [
         'heading' => "Create Note",
         'errors' => $errors
     ]);

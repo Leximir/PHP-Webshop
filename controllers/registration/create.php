@@ -1,5 +1,5 @@
 <?php
 
-view('registration/create.view.php',[
+view('registration/create.view.php', [
 
 ]);

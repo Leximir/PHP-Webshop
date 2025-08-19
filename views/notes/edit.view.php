@@ -20,8 +20,9 @@
                                     <div class="mt-1">
                                     <textarea id="body" name="body" rows="3"
                                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                              placeholder="Here's an idea for a note..." required><?= $note['body'] ?></textarea>
-                                        <?php if(isset($errors['body'])) : ?>
+                                              placeholder="Here's an idea for a note..."
+                                              required><?= $note['body'] ?></textarea>
+                                        <?php if (isset($errors['body'])) : ?>
                                             <p class="text-red-500 text-xs mt-2"><?= $errors['body'] ?></p>
                                         <?php endif; ?>
                                     </div>

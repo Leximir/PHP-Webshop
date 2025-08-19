@@ -8,16 +8,16 @@ $password = $_POST['password'];
 $errors = [];
 // dd(Validator::emailCheck('lexa@gmail.com'));
 // Validate the form inputs
-if (! Validator::emailCheck($email)){
+if (!Validator::emailCheck($email)) {
     $errors['email'] = "Please provide a valid email addres.";
 }
 
-if (! Validator::stringCheck($password, 7, 255)){
+if (!Validator::stringCheck($password, 7, 255)) {
     $errors['password'] = "Please provide a password with at least 7 characters.";
 }
 
-if(! empty($errors)){
-    view('registration/create.view.php',[
+if (!empty($errors)) {
+    view('registration/create.view.php', [
         'errors' => $errors
     ]);
     die();
@@ -27,16 +27,16 @@ if(! empty($errors)){
 $config = require base_path('config.php');
 $db = new Database($config['database']);
 
-$user = $db->query("SELECT * FROM users WHERE email = :email",[
+$user = $db->query("SELECT * FROM users WHERE email = :email", [
     'email' => $email
 ])->find();
 
-if($user){
+if ($user) {
     // if yes, redirect to login page
     redirect('/login');
 } else {
     // if not, save one to the database, and then log the user in, and redirect
-    $db->query("INSERT INTO users(email, password) VALUES (:email, :password)",[
+    $db->query("INSERT INTO users(email, password) VALUES (:email, :password)", [
         'email' => $email,
         'password' => password_hash($password, PASSWORD_BCRYPT)
     ]);

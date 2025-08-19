@@ -25,12 +25,12 @@ if ($note['user_id'] !== $currentUserId) {
 }
 
 // Validate the form
-if(! Validator::stringCheck($_POST['body'], 1, 1000)){
+if (!Validator::stringCheck($_POST['body'], 1, 1000)) {
     $errors['body'] = "A body of no more than 1000 characters is required.";
 }
 
-if(count($errors)){
-    view('notes/edit.view.php',[
+if (count($errors)) {
+    view('notes/edit.view.php', [
         'heading' => 'Edit Note',
         'errors' => $errors,
         'note' => $note
