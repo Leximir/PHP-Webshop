@@ -1,8 +1,9 @@
 <?php
 
-namespace Core;
+namespace Core\Validator;
 class Validator
 {
+    protected $errors = [];
     public static function stringCheck($value, $min = 1, $max = 1000)
     {
 
@@ -16,5 +17,12 @@ class Validator
         $value = trim($value);
 
         return filter_var($value, FILTER_VALIDATE_EMAIL);
+    }
+
+    public function getErrors(){
+        return $this->errors;
+    }
+    public function addError($key, $message){
+        $this->errors[$key] = $message;
     }
 }
