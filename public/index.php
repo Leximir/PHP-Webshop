@@ -11,6 +11,9 @@ spl_autoload_register(function ($class) {
     require base_path("{$class}.php");
 });
 
+// Service Container
+require base_path('bootstrap.php');
+
 // Routing section
 $router = new \Core\Router();
 $routes = require base_path('routes.php');
