@@ -1,11 +1,7 @@
 <?php
 
-use Core\App;
-use Core\Database;
+use Core\Authenticator;
 use Core\Validator\SessionValidator;
-use Core\Validator\Validator;
-
-$db = App::getContainer()->resolve(Database::class);
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -20,25 +16,15 @@ if ($errors) {
     exit();
 }
 
-$user = $db->query("SELECT * FROM users WHERE email = :email", [
-    'email' => $email
-])->find();
+$auth = new Authenticator();
 
-if ($user) {
-    if (password_verify($password, $user['password'])) {
-
-        $_SESSION['logged_in'] = true;
-        $_SESSION['user'] = [
-            'email' => $email
-        ];
-        session_regenerate_id(true);
-
-        redirect('/');
-    }
+if($auth->attempt($email, $password)){
+    redirect('/');
+} else {
+    view('session/create.view.php', [
+        'errors' => [
+            'password' => 'No matching account found for that email address and password.'
+        ]
+    ]);
 }
 
-view('session/create.view.php', [
-    'errors' => [
-        'password' => 'No matching account found for that email address and password.'
-    ]
-]);
