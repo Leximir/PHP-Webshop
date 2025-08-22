@@ -3,12 +3,12 @@
 use Core\App;
 use Core\Database;
 use Core\Response;
+use Core\Validator\NotesValidator;
 use Core\Validator\Validator;
 
 $db = App::getContainer()->resolve(Database::class);
 
 $currentUserId = 3;
-$errors = [];
 
 // Find the corresponding note
 $note = $db->query("SELECT * FROM notes WHERE id = :id", [
@@ -25,9 +25,8 @@ if ($note['user_id'] !== $currentUserId) {
 }
 
 // Validate the form
-if (!Validator::stringCheck($_POST['body'], 1, 1000)) {
-    $errors['body'] = "A body of no more than 1000 characters is required.";
-}
+$validator = new NotesValidator($_POST['body']);
+$errors = $validator->getErrors();
 
 if (count($errors)) {
     view('notes/edit.view.php', [

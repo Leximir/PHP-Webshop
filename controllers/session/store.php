@@ -2,23 +2,18 @@
 
 use Core\App;
 use Core\Database;
+use Core\Validator\SessionValidator;
 use Core\Validator\Validator;
 
 $db = App::getContainer()->resolve(Database::class);
 
 $email = $_POST['email'];
 $password = $_POST['password'];
-$errors = [];
 
-if (!Validator::emailCheck($email)) {
-    $errors['email'] = "Please provide a valid email address.";
-}
+$validator = new SessionValidator($email,$password);
+$errors = $validator->getErrors();
 
-if (!Validator::stringCheck($password)) {
-    $errors['password'] = "Please provide a valid password.";
-}
-
-if (!empty($errors)) {
+if ($errors) {
     view('session/create.view.php', [
         'errors' => $errors
     ]);

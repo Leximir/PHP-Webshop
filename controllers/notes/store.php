@@ -2,21 +2,19 @@
 
 use Core\App;
 use Core\Database;
-use Core\Validator\Validator;
+use Core\Validator\NotesValidator;
 
 $db = App::getContainer()->resolve(Database::class);
 
-$errors = [];
+$validator = new NotesValidator($_POST['body']);
+$errors = $validator->getErrors();
 
-if (!Validator::stringCheck($_POST['body'], 1, 1000)) {
-    $errors['body'] = "A body of no more than 1000 characters is required.";
-}
-
-if (!empty($errors)) {
+if ($errors) {
     view("notes/create.view.php", [
         'heading' => "Create Note",
         'errors' => $errors
     ]);
+    die();
 }
 
 $db->query("INSERT INTO notes(body, user_id) VALUES(:body, :user_id)", [
