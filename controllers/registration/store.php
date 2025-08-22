@@ -15,8 +15,7 @@ if ($validator->getErrors()) {
 }
 
 // Check if the account already exists
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+$db = App::getContainer()->resolve(Database::class);
 
 $user = $db->query("SELECT * FROM users WHERE email = :email", [
     'email' => $email

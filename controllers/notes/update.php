@@ -4,8 +4,7 @@ use Core\Database;
 use Core\Response;
 use Core\Validator\Validator;
 
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+$db = App::getContainer()->resolve(Database::class);
 
 $currentUserId = 3;
 $errors = [];

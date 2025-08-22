@@ -3,8 +3,7 @@
 use Core\Database;
 use Core\Validator\Validator;
 
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+$db = App::getContainer()->resolve(Database::class);
 
 $email = $_POST['email'];
 $password = $_POST['password'];
