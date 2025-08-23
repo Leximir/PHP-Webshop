@@ -1,5 +1,7 @@
 <?php
 
+use Core\Session;
+
 const BASE_PATH = __DIR__ . '/../';
 session_start();
 require BASE_PATH . "Core/functions.php";
@@ -22,3 +24,6 @@ $uri = parse_url($uri); // We parse that uri to path and query. Example: /produc
 $uri = $uri['path']; // We get only the path of the former array
 $method = isset($_POST['_method']) ? $_POST['_method'] : $_SERVER['REQUEST_METHOD'];
 $router->route($uri, $method);
+
+// Clear temporary Session data
+Session::unflash();

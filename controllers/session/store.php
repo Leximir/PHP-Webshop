@@ -1,22 +1,18 @@
 <?php
 
 use Core\Authenticator;
+use Core\Session;
 use Core\Validator\SessionValidator;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
+$auth = new Authenticator();
 
 $validator = new SessionValidator($email,$password);
-$errors = $validator->getErrors();
-
-if ($errors) {
-    view('session/create.view.php', [
-        'errors' => $errors
-    ]);
-    exit();
+Session::flash('errors', $validator->getErrors());
+if (Session::get('errors')) {
+    redirect('/login');
 }
-
-$auth = new Authenticator();
 
 if($auth->attempt($email, $password)){
     redirect('/');
