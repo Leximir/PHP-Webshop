@@ -10,6 +10,9 @@ $auth = new Authenticator();
 
 $validator = new SessionValidator($email,$password);
 Session::flash('errors', $validator->getErrors());
+Session::flash('old', [
+    'email' => $email
+]);
 if (Session::get('errors')) {
     redirect('/login');
 }
