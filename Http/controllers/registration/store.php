@@ -2,7 +2,7 @@
 
 use Core\App;
 use Core\Database;
-use Core\Validator\RegistrationValidator;
+use Http\Validator\RegistrationValidator;
 
 $email = $_POST['email'];
 $password = $_POST['password'];

@@ -2,7 +2,7 @@
 
 use Core\Authenticator;
 use Core\Session;
-use Core\Validator\SessionValidator;
+use Http\Validator\SessionValidator;
 
 $email = $_POST['email'];
 $password = $_POST['password'];

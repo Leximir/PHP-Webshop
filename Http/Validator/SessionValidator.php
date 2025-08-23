@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Validator;
+namespace Http\Validator;
 
 class SessionValidator extends Validator
 {

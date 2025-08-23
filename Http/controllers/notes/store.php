@@ -2,7 +2,7 @@
 
 use Core\App;
 use Core\Database;
-use Core\Validator\NotesValidator;
+use Http\Validator\NotesValidator;
 
 $db = App::getContainer()->resolve(Database::class);
 
