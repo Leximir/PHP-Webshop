@@ -7,7 +7,7 @@ use Http\Validator\NotesValidator;
 
 $db = App::getContainer()->resolve(Database::class);
 
-$currentUserId = 3;
+$currentUserId = $_SESSION['user']['id'];
 
 // Find the corresponding note
 $note = $db->query("SELECT * FROM notes WHERE id = :id", [
