@@ -11,7 +11,7 @@ class Router
     public function get($uri, $controller)
     {
 
-        return $this->addToRoutes($uri, $controller, "GET");
+        return $this->addToRoutes($uri, "app/Http/controllers/" . $controller, "GET");
 
     }
 
@@ -29,28 +29,28 @@ class Router
     public function post($uri, $controller)
     {
 
-        return $this->addToRoutes($uri, $controller, "POST");
+        return $this->addToRoutes($uri, "app/Http/controllers/" . $controller, "POST");
 
     }
 
     public function delete($uri, $controller)
     {
 
-        return $this->addToRoutes($uri, $controller, "DELETE");
+        return $this->addToRoutes($uri, "app/Http/controllers/" . $controller, "DELETE");
 
     }
 
     public function patch($uri, $controller)
     {
 
-        return $this->addToRoutes($uri, $controller, "PATCH");
+        return $this->addToRoutes($uri, "app/Http/controllers/" . $controller, "PATCH");
 
     }
 
     public function put($uri, $controller)
     {
 
-        return $this->addToRoutes($uri, $controller, "PUT");
+        return $this->addToRoutes($uri, "app/Http/controllers/" . $controller, "PUT");
 
     }
 
