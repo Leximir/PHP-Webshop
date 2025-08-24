@@ -1,12 +1,12 @@
 <?php
 
-namespace Core\Middleware;
+namespace Http\Middleware;
 
-class Auth
+class Guest
 {
     public function handle()
     {
-        if (!$_SESSION['user'] ?? false) {
+        if ($_SESSION['user'] ?? false) {
             header("Location: /");
             exit();
         }

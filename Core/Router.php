@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use Core\Middleware\Middleware;
+use Http\Middleware\Middleware;
 
 class Router
 {
