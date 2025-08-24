@@ -41,3 +41,12 @@ function old($key, $default = '')
 {
     return \Core\Session::get('old')[$key] ?? $default;
 }
+
+function userId()
+{
+    if($_SESSION['user'])
+    {
+        return $_SESSION['user']['id'];
+    }
+    return null;
+}
