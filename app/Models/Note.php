@@ -1,7 +1,49 @@
 <?php
 
 namespace Models;
+use Core\App;
+use Core\Database;
+
 class Note
 {
+
+    protected $db;
+
+    public function __construct()
+    {
+        $this->db = Database::db();
+    }
+
+    public function all()
+    {
+        $notes = $this->db->query("SELECT * FROM notes WHERE user_id = :user_id",[
+            'user_id' => userId()
+        ])->get();
+        return $notes;
+    }
+
+    public function whereID($id)
+    {
+        $note = $this->db->query("SELECT * FROM notes WHERE id = :id", [
+            'id' => $id
+        ])->find();
+        return $note;
+    }
+
+    public function insert($body)
+    {
+        $this->db->query("INSERT INTO notes(body, user_id) VALUES(:body, :user_id)", [
+            'body' => $body,
+            'user_id' => userId()
+        ]);
+    }
+
+    public function update($id, $body)
+    {
+        $this->db->query("UPDATE notes SET body = :body WHERE id = :id", [
+            'id' => $id,
+            'body' => $body
+        ]);
+    }
 
 }

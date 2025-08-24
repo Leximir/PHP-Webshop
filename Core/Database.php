@@ -36,4 +36,9 @@ class Database
     {
         return $this->statement->fetch();
     }
+
+    public static function db()
+    {
+        return App::getContainer()->resolve(Database::class);
+    }
 }

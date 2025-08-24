@@ -1,14 +1,8 @@
 <?php
 
-use Core\App;
-use Core\Database;
 use Core\Response;
 
-$db = App::getContainer()->resolve(Database::class);
-
-$note = $db->query("SELECT * FROM notes WHERE id = :id", [
-    'id' => $_GET['id']
-])->find();
+$note = (new \Models\Note())->whereID($_GET['id']);
 
 if (!$note) {
     abort();

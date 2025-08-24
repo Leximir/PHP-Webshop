@@ -1,10 +1,6 @@
 <?php
 
-use Core\App;
-use Core\Database;
 use Http\Validator\NotesValidator;
-
-$db = App::getContainer()->resolve(Database::class);
 
 $validator = new NotesValidator($_POST['body']);
 $errors = $validator->getErrors();
@@ -17,10 +13,7 @@ if ($errors) {
     die();
 }
 
-$db->query("INSERT INTO notes(body, user_id) VALUES(:body, :user_id)", [
-    'body' => $_POST['body'],
-    'user_id' => userId()
-]);
+(new \Models\Note())->insert($_POST['body']);
 
 redirect('/notes');
 

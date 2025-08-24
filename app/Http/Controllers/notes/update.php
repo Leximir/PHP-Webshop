@@ -5,12 +5,10 @@ use Core\Database;
 use Core\Response;
 use Http\Validator\NotesValidator;
 
-$db = App::getContainer()->resolve(Database::class);
+$noteModel = new \Models\Note();
 
 // Find the corresponding note
-$note = $db->query("SELECT * FROM notes WHERE id = :id", [
-    'id' => $_POST['id']
-])->find();
+$note = $noteModel->whereID($_POST['id']);
 
 // Authorize that the current user can edit the note
 if (!$note) {
@@ -35,10 +33,7 @@ if (count($errors)) {
 }
 
 // If no validation errors, update the record in the notes database table
-$db->query("UPDATE notes SET body = :body WHERE id = :id", [
-    'id' => $_POST['id'],
-    'body' => $_POST['body']
-]);
+$noteModel->update($_POST['id'], $_POST['body']);
 
 // Redirect hte user
 redirect('/notes');
