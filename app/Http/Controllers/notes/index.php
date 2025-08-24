@@ -5,10 +5,8 @@ use Core\Database;
 
 $db = App::getContainer()->resolve(Database::class);
 
-$currentUser = $_SESSION['user']['id'];
-
 $notes = $db->query("SELECT * FROM notes WHERE user_id = :user_id",[
-    'user_id' => $currentUser
+    'user_id' => userId()
 ])->get();
 
 view("notes/index.view.php", [

@@ -6,7 +6,6 @@ use Core\Response;
 
 $db = App::getContainer()->resolve(Database::class);
 $heading = "Note";
-$currentUserId = $_SESSION['user']['id'];
 
 $note = $db->query("SELECT * FROM notes WHERE id = :id", [
     'id' => $_POST['id']
@@ -22,7 +21,7 @@ if ($note['user_id'] !== $currentUserId) {
 
 $db->query('DELETE FROM notes WHERE id = :id AND user_id = :user_id', [
     'id' => $_POST['id'],
-    'user_id' => $currentUserId
+    'user_id' => userId()
 ]);
 
 redirect('/notes');
