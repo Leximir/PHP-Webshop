@@ -4,12 +4,10 @@ use Core\App;
 use Core\Database;
 use Core\Response;
 
-$db = App::getContainer()->resolve(Database::class);
+$noteModel = new \Models\Note();
 $heading = "Note";
 
-$note = $db->query("SELECT * FROM notes WHERE id = :id", [
-    'id' => $_POST['id']
-])->find();
+$note = $noteModel->whereID($_POST['id']);
 
 if (!$note) {
     abort();
@@ -19,9 +17,6 @@ if ($note['user_id'] !== userId()) {
     abort(Response::FORBIDDEN);
 }
 
-$db->query('DELETE FROM notes WHERE id = :id AND user_id = :user_id', [
-    'id' => $_POST['id'],
-    'user_id' => userId()
-]);
+$noteModel->delete($_POST['id']);
 
 redirect('/notes');
