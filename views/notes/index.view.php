@@ -16,7 +16,7 @@
 
             <p class="mt-10">
                 <a href="/notes/create" class="text-blue-500 hover:underline">Create Note</a>
-                </pc>
+            </p>
         </div>
     </main>
 
