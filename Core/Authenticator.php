@@ -4,7 +4,8 @@ namespace Core;
 
 class Authenticator
 {
-    public function attempt($email, $password){
+    public function attempt($email, $password)
+    {
         $user = App::getContainer()->resolve(Database::class)->query("SELECT * FROM users WHERE email = :email", [
             'email' => $email
         ])->find();
@@ -24,7 +25,8 @@ class Authenticator
         return false;
     }
 
-    public function login($user){
+    public function login($user)
+    {
         $_SESSION['logged_in'] = true;
         $_SESSION['user'] = [
             'id' => $user['id'],

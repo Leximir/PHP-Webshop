@@ -18,6 +18,11 @@ class Database
         ]);
     }
 
+    public static function db()
+    {
+        return App::getContainer()->resolve(Database::class);
+    }
+
     public function query($query, $params = [])
     {
         $this->statement = $this->connection->prepare($query);
@@ -35,10 +40,5 @@ class Database
     public function find()
     {
         return $this->statement->fetch();
-    }
-
-    public static function db()
-    {
-        return App::getContainer()->resolve(Database::class);
     }
 }

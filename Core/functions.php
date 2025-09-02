@@ -44,8 +44,7 @@ function old($key, $default = '')
 
 function userId()
 {
-    if($_SESSION['user'])
-    {
+    if ($_SESSION['user']) {
         return $_SESSION['user']['id'];
     }
     return null;

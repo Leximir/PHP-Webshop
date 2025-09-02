@@ -1,7 +1,7 @@
 <?php
 
 namespace Models;
-use Core\App;
+
 use Core\Database;
 
 class Note
@@ -16,7 +16,7 @@ class Note
 
     public function all()
     {
-        $notes = $this->db->query("SELECT * FROM notes WHERE user_id = :user_id",[
+        $notes = $this->db->query("SELECT * FROM notes WHERE user_id = :user_id", [
             'user_id' => userId()
         ])->get();
         return $notes;

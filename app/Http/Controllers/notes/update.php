@@ -1,7 +1,5 @@
 <?php
 
-use Core\App;
-use Core\Database;
 use Core\Response;
 use Http\Validator\NotesValidator;
 

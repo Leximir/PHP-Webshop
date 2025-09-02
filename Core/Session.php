@@ -6,22 +6,21 @@ class Session
 {
     public static function has($key)
     {
-        return (bool) static::get($key);
+        return (bool)static::get($key);
+    }
+
+    public static function get($key, $default = null)
+    {
+        if (isset($_SESSION['_flash'][$key])) {
+            return $_SESSION['_flash'][$key];
+        }
+
+        return $_SESSION[$key] ?? $default;
     }
 
     public static function put($key, $value)
     {
         $_SESSION[$key] = $value;
-    }
-
-    public static function get($key, $default = null)
-    {
-        if(isset($_SESSION['_flash'][$key]))
-        {
-            return $_SESSION['_flash'][$key];
-        }
-
-        return $_SESSION[$key] ?? $default;
     }
 
     public static function flash($key, $value)
@@ -34,11 +33,6 @@ class Session
         unset($_SESSION['_flash']);
     }
 
-    public static function flush()
-    {
-        $_SESSION = [];
-    }
-
     public static function destroy()
     {
         Session::flush();
@@ -46,5 +40,10 @@ class Session
 
         $params = session_get_cookie_params();
         setcookie('PHPSESID', '', time() - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+    }
+
+    public static function flush()
+    {
+        $_SESSION = [];
     }
 }
