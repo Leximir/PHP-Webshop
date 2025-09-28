@@ -13,6 +13,14 @@ class Model {
         $this->db = Database::db();
     }
 
+    public function all($table)
+    {
+        $records = $this->db->query("SELECT * FROM $table WHERE user_id = :user_id", [
+            'user_id' => userId()
+        ])->get();
+        return $records;
+    }
+
 
 
 }

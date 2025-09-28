@@ -4,23 +4,23 @@ namespace Models;
 
 use Core\Database;
 
-class Note
+class Note extends Model
 {
 
-    protected $db;
-
-    public function __construct()
-    {
-        $this->db = Database::db();
-    }
-
-    public function all()
-    {
-        $notes = $this->db->query("SELECT * FROM notes WHERE user_id = :user_id", [
-            'user_id' => userId()
-        ])->get();
-        return $notes;
-    }
+//    protected $db;
+//
+//    public function __construct()
+//    {
+//        $this->db = Database::db();
+//    }
+//
+//    public function all()
+//    {
+//        $notes = $this->db->query("SELECT * FROM notes WHERE user_id = :user_id", [
+//            'user_id' => userId()
+//        ])->get();
+//        return $notes;
+//    }
 
     public function whereID($id)
     {
