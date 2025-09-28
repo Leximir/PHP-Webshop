@@ -34,7 +34,8 @@ if ($user) {
     // Mark that tha user has logged in
     $_SESSION['logged_in'] = true;
     $_SESSION['user'] = [
-        'email' => $email
+        'email' => $email,
+        'id' => $user['id']
     ];
 
     redirect('/');
