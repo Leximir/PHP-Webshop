@@ -3,7 +3,7 @@
 use Core\Response;
 
 $noteModel = new \Models\Note();
-$note = $noteModel->whereID($_GET['id']);
+$note = $noteModel->whereID('notes', $_GET['id']);
 
 if (!$note) {
     abort();

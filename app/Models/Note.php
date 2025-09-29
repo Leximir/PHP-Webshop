@@ -6,29 +6,13 @@ use Core\Database;
 
 class Note extends Model
 {
-
-//    protected $db;
-//
-//    public function __construct()
+//    public function whereID($id)
 //    {
-//        $this->db = Database::db();
+//        $note = $this->db->query("SELECT * FROM notes WHERE id = :id", [
+//            'id' => $id
+//        ])->find();
+//        return $note;
 //    }
-//
-//    public function all()
-//    {
-//        $notes = $this->db->query("SELECT * FROM notes WHERE user_id = :user_id", [
-//            'user_id' => userId()
-//        ])->get();
-//        return $notes;
-//    }
-
-    public function whereID($id)
-    {
-        $note = $this->db->query("SELECT * FROM notes WHERE id = :id", [
-            'id' => $id
-        ])->find();
-        return $note;
-    }
 
     public function insert($body)
     {

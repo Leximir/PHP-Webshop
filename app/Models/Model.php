@@ -21,6 +21,14 @@ class Model {
         return $records;
     }
 
+    public function whereID($table, $id)
+    {
+        $record = $this->db->query("SELECT * FROM $table WHERE id = :id", [
+            'id' => $id
+        ])->find();
+        return $record;
+    }
+
 
 
 }
