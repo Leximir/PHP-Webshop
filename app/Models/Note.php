@@ -6,14 +6,6 @@ use Core\Database;
 
 class Note extends Model
 {
-//    public function whereID($id)
-//    {
-//        $note = $this->db->query("SELECT * FROM notes WHERE id = :id", [
-//            'id' => $id
-//        ])->find();
-//        return $note;
-//    }
-
     public function insert($body)
     {
         $this->db->query("INSERT INTO notes(body, user_id) VALUES(:body, :user_id)", [
@@ -29,13 +21,4 @@ class Note extends Model
             'body' => $body
         ]);
     }
-
-    public function delete($id)
-    {
-        $this->db->query('DELETE FROM notes WHERE id = :id AND user_id = :user_id', [
-            'id' => $id,
-            'user_id' => userId()
-        ]);
-    }
-
 }

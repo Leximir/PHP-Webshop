@@ -15,6 +15,6 @@ if ($note['user_id'] !== userId()) {
     abort(Response::FORBIDDEN);
 }
 
-$noteModel->delete($_POST['id']);
+$noteModel->delete('notes', $_POST['id']);
 
 redirect('/notes');

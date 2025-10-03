@@ -29,6 +29,11 @@ class Model {
         return $record;
     }
 
-
-
+    public function delete($table, $id)
+    {
+        $this->db->query("DELETE FROM {$table} WHERE id = :id AND user_id = :user_id", [
+            'id' => $id,
+            'user_id' => userId()
+        ]);
+    }
 }
