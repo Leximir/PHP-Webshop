@@ -2,7 +2,7 @@
 
 use Core\Response;
 
-$note = (new \Models\Note())->whereID('notes', $_GET['id']);
+$note = (new \Models\Note())->whereID($_GET['id']);
 
 if (!$note) {
     abort();

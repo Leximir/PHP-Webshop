@@ -6,7 +6,7 @@ use Http\Validator\NotesValidator;
 $noteModel = new \Models\Note();
 
 // Find the corresponding note
-$note = $noteModel->whereID('notes',$_POST['id']);
+$note = $noteModel->whereID($_POST['id']);
 
 // Authorize that the current user can edit the note
 if (!$note) {

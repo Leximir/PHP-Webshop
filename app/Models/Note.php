@@ -6,6 +6,12 @@ use Core\Database;
 
 class Note extends Model
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->table = 'notes';
+    }
+
     public function insert($body)
     {
         $this->db->query("INSERT INTO notes(body, user_id) VALUES(:body, :user_id)", [
