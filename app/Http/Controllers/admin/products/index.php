@@ -2,4 +2,7 @@
 
 $products = new \Models\Product();
 
-dd($products->all());
+view("admin/products/index.view.php", [
+    'products' => $products->all(),
+    'heading' => 'All Products'
+]);
