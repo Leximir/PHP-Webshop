@@ -16,9 +16,15 @@ class Model {
 
     public function all()
     {
-        $records = $this->db->query("SELECT * FROM $this->table WHERE user_id = :user_id", [
-            'user_id' => userId()
-        ])->get();
+
+        $records = $this->db->query("SELECT * FROM $this->table")->get();
+
+        if(!empty($records['user_id'])){
+            $records = $this->db->query("SELECT * FROM $this->table WHERE user_id = :user_id", [
+                'user_id' => userId()
+            ])->get();
+        }
+
         return $records;
     }
 
