@@ -33,8 +33,8 @@
                             <?php endif; ?>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            <a href="/admin/products/edit?id=<?= $product['id'] ?>" class="text-blue-500 hover:underline mr-2">Edit</a>
-                            <a href="/admin/products/delete?id=<?= $product['id'] ?>" class="text-red-500 hover:underline">Delete</a>
+                            <a href="/admin/product/edit?id=<?= $product['id'] ?>" class="text-blue-500 hover:underline mr-2">Edit</a>
+                            <a href="/admin/product/delete?id=<?= $product['id'] ?>" class="text-red-500 hover:underline">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
