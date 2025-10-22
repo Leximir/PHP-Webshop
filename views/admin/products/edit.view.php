@@ -71,6 +71,32 @@
                                     </div>
                                 </div>
 
+                                <!-- Image -->
+                                <div class="mt-6">
+                                    <label for="image" class="block text-sm font-medium text-gray-700">Product Image</label>
+
+                                    <!-- Prikaz trenutne slike -->
+                                    <?php if (!empty($product['image'])): ?>
+                                        <div class="mt-2">
+                                            <img src="public/images/products/<?= htmlspecialchars($product['image']) ?>"
+                                                 alt="Product Image"
+                                                 class="h-40 w-40 object-cover rounded-md border border-gray-300 shadow-sm">
+                                        </div>
+                                    <?php else: ?>
+                                        <p class="text-gray-500 text-sm mt-2">No image uploaded yet.</p>
+                                    <?php endif; ?>
+
+                                    <!-- Dugme za promenu slike -->
+                                    <div class="mt-3">
+                                        <input type="file" name="image" id="image"
+                                               accept="image/*"
+                                               class="block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer bg-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                                        <?php if (!empty($errors['image'])): ?>
+                                            <p class="text-red-500 text-xs mt-2"><?= htmlspecialchars($errors['image']) ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <!-- Buttons -->
