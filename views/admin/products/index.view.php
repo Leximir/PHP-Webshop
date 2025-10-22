@@ -32,9 +32,16 @@
                                 <span class="text-gray-400">No image</span>
                             <?php endif; ?>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 flex flex-row">
                             <a href="/admin/product/edit?id=<?= $product['id'] ?>" class="text-blue-500 hover:underline mr-2">Edit</a>
-                            <a href="/admin/product/delete?id=<?= $product['id'] ?>" class="text-red-500 hover:underline">Delete</a>
+
+                            <form action="/admin/product" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                                <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                            </form>
+
+<!--                            <a href="/admin/product?id=--><?php //= $product['id'] ?><!--" class="text-red-500 hover:underline">Delete</a>-->
                         </td>
                     </tr>
                 <?php endforeach; ?>
