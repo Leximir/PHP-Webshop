@@ -2,8 +2,6 @@
 
 namespace Models;
 
-use Core\Database;
-
 class Note extends Model
 {
     public function __construct()
