@@ -8,7 +8,7 @@
                 <div class="mt-5 md:col-span-2 md:mt-0">
 
                     <!-- Forma za kreiranje proizvoda -->
-                    <form method="POST" action="/products/create" enctype="multipart/form-data">
+                    <form method="POST" action="/admin/products/create" enctype="multipart/form-data">
                         <div class="shadow sm:overflow-hidden sm:rounded-md">
                             <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
@@ -57,6 +57,23 @@
                                                required>
                                         <?php if (isset($errors['price'])) : ?>
                                             <p class="text-red-500 text-xs mt-2"><?= htmlspecialchars($errors['price']) ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <!-- Amount -->
+                                <div>
+                                    <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
+                                    <div class="mt-1">
+                                        <input type="number" name="amount" id="amount"
+                                               value="<?= isset($_POST['amount']) ? htmlspecialchars($_POST['amount']) : '' ?>"
+                                               min="0"
+                                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm
+                                                  focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                               placeholder="e.g. 1"
+                                               required>
+                                        <?php if (isset($errors['amount'])) : ?>
+                                            <p class="text-red-500 text-xs mt-2"><?= htmlspecialchars($errors['amount']) ?></p>
                                         <?php endif; ?>
                                     </div>
                                 </div>

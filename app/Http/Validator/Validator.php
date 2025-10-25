@@ -12,6 +12,26 @@ class Validator
 
         return strlen($value) >= $min && strlen($value) <= $max;
     }
+    public static function integerCheck($value, $min = 0, $max = 1000000)
+    {
+        $value = trim($value);
+
+        // Provera da li je validan integer i da li je u rasponu
+        return filter_var($value, FILTER_VALIDATE_INT) !== false
+            && $value >= $min
+            && $value <= $max;
+    }
+
+    // ✅ Decimal validacija (float)
+    public static function decimalCheck($value, $min = 0.0, $max = 1000000.0)
+    {
+        $value = trim($value);
+
+        // Provera da li je validan decimalni broj i da li je u rasponu
+        return filter_var($value, FILTER_VALIDATE_FLOAT) !== false
+            && $value >= $min
+            && $value <= $max;
+    }
 
     public static function emailCheck($value)
     {
