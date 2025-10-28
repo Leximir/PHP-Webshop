@@ -2,6 +2,7 @@
 
 use Http\Validator\ProductsValidator;
 
+$productModel = new \Models\Product();
 $validator = new ProductsValidator($_POST);
 $errors = $validator->getErrors();
 
@@ -13,4 +14,10 @@ if($errors){
     die();
 }
 
-dd($_POST);
+$image = new \Models\Image();
+$imageName = $image->generateRandomName('jpg');
+$image->uploadImage($_FILES['image'],'images/products',$imageName);
+
+$productModel->insert($_POST['name'], $_POST['description'], $_POST['amount'], $_POST['price'], $imageName);
+
+redirect('admin/products');

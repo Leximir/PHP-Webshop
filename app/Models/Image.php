@@ -11,14 +11,14 @@ class Image extends Model
     const MAX_IMAGE_WIDTH = 1920;
     const MAX_IMAGE_HEIGHT = 1080;
 
-    public function uploadImage($image, $destination)
+    public function uploadImage($image, $destination, $imageName)
     {
         $validator = new ImagesValidator();
         $validator->extensionCheck($image['name']);
         $validator->resolutionCheck($image['tmp_name']);
         $validator->sizeCheck($image['size']);
 
-        $randomName = $this->generateRandomName('jpg');
+        $randomName = $imageName;
 
         if( !is_dir('./'.$destination) ) {
             mkdir('./'.$destination, 0755, true);
@@ -32,8 +32,8 @@ class Image extends Model
         $finalDestination = $destination.'/'.$finalName;
         move_uploaded_file($image, $finalDestination);
 
-        $finalName = $this->db->real_escape_string($finalName);
-        $this->db->query("INSERT INTO images(image) VALUES ('$finalName')");
+//        $finalName = $this->db->real_escape_string($finalName);
+//        $this->db->query("INSERT INTO images(image) VALUES ('$finalName')");
     }
     public function generateRandomName($extension)
     {
