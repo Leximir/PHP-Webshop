@@ -31,3 +31,6 @@ $router->get('/admin/product/edit', 'admin/products/edit.php')->only('auth');
 $router->patch('/admin/product', 'admin/products/update.php')->only('auth');
 $router->get('/admin/products/create', 'admin/products/create.php')->only('auth');
 $router->post('/admin/products/create', 'admin/products/store.php')->only('auth');
+
+$router->get('/test/images', 'test/index.php');
+$router->post('/test/images', 'test/store.php');
