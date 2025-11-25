@@ -3,9 +3,10 @@
 $image = new \Core\Images();
 $validator = new \Http\Validator\ImagesValidator();
 
-$validator->validateImageErrorHandling();
+if($validator->validateImageErrorHandling()){
+    $validator->validateImageExtension();
+};
 $validator->validateImageSize();
-$validator->validateImageExtension();
 
 $errors = $validator->getErrors();
 
